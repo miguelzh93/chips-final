@@ -1,0 +1,45 @@
+<select name="etiquetas" id="cmbEtiquetas" (change)="seleccionar($event)">
+  <option value=""></option>
+  <option value="[(URL)]">URL</option>
+  <option value="[[Dato 1]]">dato1</option>
+  <option value="[(Dato 2)]">dato2</option>
+</select>
+
+<br />
+<br />
+<br />
+<div id="caja" class="caja" contenteditable="true">
+  <span id="comodin" contenteditable="false"></span>
+  <ng-container *ngFor="let item of texto; let i = index">
+    <span *ngIf="item.tipo == 0">{{item.valor}}</span>
+    <div *ngIf="item.tipo == 1" class="chip" contenteditable="false">
+      {{item.valor}} 
+      <span class="material-icons" (click)="gestionarCombo(i)">expand_more </span> 
+      
+      <span class="material-icons" (click)="eliminarVariable(i)">close</span>
+      <div class="combo" *ngIf="item.verCombo">
+        <input
+          type="radio"
+          id="rbTexto"
+          [name]="'tipo'+i"
+          value="texto"
+          (change)="cambiarTipoLectura(i,'texto')"
+          [checked]="item.tipoLectura=='texto'"
+        />
+        <label for="rbTexto">Leer como texto</label>
+        <br />
+        <input
+          type="radio"
+          id="rbCifra"
+          [name]="'tipo'+i"
+          value="cifra"
+          (change)="cambiarTipoLectura(i,'cifra')"
+          [checked]="item.tipoLectura=='cifra'"
+        />
+        <label for="rbCifra">Leer como cifra</label>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<button (click)="getTexto()">exportar texto</button>
+<span >{{textoFinal}}</span>

@@ -1,0 +1,30 @@
+
+.caja {
+    border:1px solid gray;
+    padding: 10px;
+    height: 80px;
+    margin-bottom: 200px;
+    overflow: auto;
+  }
+  
+  .chip {
+    
+    padding: 3px 8px 3px 5px;
+    
+    border-radius: 7px 7px 0 0;
+    background-color: #CCC;
+    position: relative;
+    display: inline-flex;
+  }
+  
+  .chip .combo {
+    position: absolute;
+    width: 150px;
+    left: 0;
+    top: 30px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, .5);
+    box-shadow: 1px 1px 10px #CCC;
+    border-radius: 0 7px 7px 7px;
+    
+  }
