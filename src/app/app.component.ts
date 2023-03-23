@@ -30,7 +30,6 @@ export class AppComponent {
   }
 
   mapearTexto(texto: string) {
-
     let textoMapear = this.reemplazarCadenas(texto);
     this.texto = [];
     for (let i = 0; i < textoMapear.length; i++) {
@@ -108,7 +107,15 @@ export class AppComponent {
 
   cambiarTipoLectura(posicionItem: number, nuevoTipo: string) {
     this.texto[posicionItem].tipoLectura = nuevoTipo;
+    if (nuevoTipo =='texto'){
+      this.texto[posicionItem].valor = this.texto[posicionItem].valor.replace(k.INICIO_VAR_CIFRA, k.INICIO_VAR_TEXTO).replace(k.FIN_VAR_CIFRA, k.FIN_VAR_TEXTO);
+    } else {
+      this.texto[posicionItem].valor = this.texto[posicionItem].valor.replace(k.INICIO_VAR_TEXTO, k.INICIO_VAR_CIFRA).replace(k.FIN_VAR_TEXTO, k.FIN_VAR_CIFRA);
+    }
     this.gestionarCombo(posicionItem);
+    let tipoTexto : string = '';
+    this.texto.forEach(numero => tipoTexto = tipoTexto + numero.valor);
+    this.mapearTexto(tipoTexto);
   }
 
   eliminarVariable(i: number) {
