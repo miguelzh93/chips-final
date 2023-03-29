@@ -8,7 +8,7 @@
 <br />
 <br />
 <br />
-<div id="caja" class="caja" contenteditable="true">
+<div #text id="caja" class="caja" contenteditable="true" (keyup)="getPosition(text);" (click)="getPosition(text);" >
   <span id="comodin" contenteditable="false"></span>
   <ng-container *ngFor="let item of texto; let i = index">
     <span *ngIf="item.tipo == 0">{{item.valor}}</span>
@@ -42,4 +42,5 @@
   </ng-container>
 </div>
 <button (click)="getTexto()">exportar texto</button>
-<span >{{textoFinal}}</span>
+<div >{{textoFinal}}</div>
+<div> INicia en {{this.position.start}} Termina en {{this.position.end}}</div>
