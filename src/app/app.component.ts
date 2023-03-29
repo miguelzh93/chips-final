@@ -23,6 +23,7 @@ const k = {
 export class AppComponent {
   texto: Array<Item> = [];
   textoFinal: string = '';
+  position = { start: 0, end: 0 };
 
   ngOnInit() {
     let textoOriginal: string = 'Esta es una prueba de un texto con [[varNum1]] con otro tipo de variable [(varText1)]';
@@ -134,6 +135,18 @@ export class AppComponent {
     let caja: HTMLElement =
     document.getElementById('caja') || new HTMLElement();
     this.textoFinal = this.reemplazarCadenas('' + caja.textContent);
+  }
+
+  getPosition(el: any) {
+    let selection = document.getSelection() || new Selection;
+      if (selection.rangeCount) {
+      let range = selection.getRangeAt(0);
+      let range2 = range.cloneRange(); 
+      range2.selectNodeContents(el);  
+      this.position.start = range.startOffset;
+      this.position.end = range.endOffset;
+    }
+    console.log(this.position.start, this.position.end)
   }
 }
 
