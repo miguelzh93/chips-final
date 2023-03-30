@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, DebugNode } from '@angular/core';
+
 
 interface Item {
   tipo: number;
@@ -86,6 +87,10 @@ export class AppComponent {
     }
   }
 
+  agregarVarEnPosc(textOriginal: string, textoInsertar: string ,  posicion: number) {
+    return textOriginal.slice(0, posicion) + textoInsertar + (textOriginal).slice(posicion);  
+  }
+
   seleccionar(event: any) {
     const strEtiqueta = event.target.value;
     let caja: HTMLElement =
@@ -100,7 +105,10 @@ export class AppComponent {
         }
       });
     }
-    this.mapearTexto(`${texto1} ${strEtiqueta}`);
+    debugger;
+    let textoReemp = this.agregarVarEnPosc(this.textoSeleccionado, strEtiqueta, this.position.start);
+    let textFinal = texto1.replace(this.textoSeleccionado , textoReemp);
+    this.mapearTexto(textFinal);
   }
 
   gestionarCombo(posicionItem: number) {
