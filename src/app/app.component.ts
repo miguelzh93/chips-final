@@ -24,6 +24,7 @@ export class AppComponent {
   texto: Array<Item> = [];
   textoFinal: string = '';
   position = { start: 0, end: 0 };
+  textoSeleccionado: string =  '';
 
   ngOnInit() {
     let textoOriginal: string = 'Esta es una prueba de un texto con [[varNum1]] con otro tipo de variable [(varText1)]';
@@ -139,10 +140,11 @@ export class AppComponent {
 
   getPosition(el: any) {
     let selection = document.getSelection() || new Selection;
-      if (selection.rangeCount) {
+    if (selection.rangeCount) {
       let range = selection.getRangeAt(0);
       let range2 = range.cloneRange(); 
-      range2.selectNodeContents(el);  
+      range2.selectNodeContents(selection.anchorNode || new Node);  
+      this.textoSeleccionado = range2.startContainer.textContent || '';
       this.position.start = range.startOffset;
       this.position.end = range.endOffset;
     }
